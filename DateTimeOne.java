@@ -2,6 +2,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.TreeMap;
@@ -84,15 +85,15 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 		timeZones.put("CST", date.toString());
 		
 		time.setTimeZone(TimeZone.getTimeZone("GMT"));
-		String gmt = "GMT: " + time.format(timeZones.get("GMT"));
+		String gmt = "GMT: " + time.format(new Date(timeZones.get("GMT")));
 		System.out.println(gmt);
 		
 		time.setTimeZone(TimeZone.getTimeZone("BST"));
-		String bst = "BST (90E): " + time.format(timeZones.get("BST"));
+		String bst = "BST (90E): " + time.format(new Date(timeZones.get("BST")));
 		System.out.println(bst);
 		
 		time.setTimeZone(TimeZone.getTimeZone("CST"));
-		String cst = "CST (90W): " + time.format(timeZones.get("CST"));
+		String cst = "CST (90W): " + time.format(new Date(timeZones.get("CST")));
 		System.out.println(cst);
 		
 	}
@@ -100,7 +101,7 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	@Override
 	void timeZoneHashMap() {
 		//make the hashmap of string string
-		HashMap<String, String> timeZones = new HashMap<String, String>(5);
+		HashMap<String, String> timeZones = new HashMap<String, String>(4);
 		
 		//add all of the elements we need
 		
@@ -113,34 +114,36 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 		//set up all of the formats that we need
 		SimpleDateFormat style1 = new SimpleDateFormat("z MM/dd/yyyy kk:mm");
 		SimpleDateFormat style3 = new SimpleDateFormat("MM/dd/yyyy kk:mm");
-		SimpleDateFormat style5 = new SimpleDateFormat("yyyy-MM-ddTkk:mm");
+		SimpleDateFormat style5 = new SimpleDateFormat("yyyy-MM-dd'T'kk:mm");
 		
 		//we need to sort the array based on the first letter of the timeZone
-		
-		
-		//Style 1
-		for(Map.Entry<String, String> entry : timeZones.entrySet())
-		{
-			System.out.println(entry.getKey() + " " + style1.format(timeZones.get(entry.getKey())));
-		}
-		
-		//sort again by the month this time
 		TreeMap<String, String> sorted = new TreeMap<>();
 		sorted.putAll(timeZones);//fill with the data from timeZones
-		
-		//Style3
-		for(Map.Entry<String, String> entry : timeZones.entrySet())
+
+		//Style 1
+		System.out.println("Print Style 1:");
+		for(Map.Entry<String, String> entry : sorted.entrySet())
 		{
-			System.out.println(entry.getKey() + " " + style3.format(timeZones.get(entry.getKey())));
+			System.out.println(entry.getKey() + " " + style1.format(
+					new Date(sorted.get(entry.getKey()))));
 		}
 		
-		//sort by the year
+		
+		//Style3
+		System.out.println("Print Style 3:");
+		for(Map.Entry<String, String> entry : sorted.entrySet())
+		{
+			System.out.println(entry.getKey() + " " + style1.format(
+					new Date(sorted.get(entry.getKey()))));
+		}
 		
 		
 		//Style5
-		for(Map.Entry<String, String> entry : timeZones.entrySet())
+		System.out.println("Print Style 5: Final sorted Array:");
+		for(Map.Entry<String, String> entry : sorted.entrySet())
 		{
-			System.out.println(entry.getKey() + " " + style5.format(timeZones.get(entry.getKey())));
+			System.out.println(entry.getKey() + " " + style1.format(
+					new Date(sorted.get(entry.getKey()))));
 		}
 	}
    
