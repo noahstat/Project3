@@ -1,8 +1,6 @@
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.TreeMap;
@@ -133,7 +131,7 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 		System.out.println("Print Style 3:");
 		for(Map.Entry<String, String> entry : sorted.entrySet())
 		{
-			System.out.println(entry.getKey() + " " + style1.format(
+			System.out.println(entry.getKey() + " " + style3.format(
 					new Date(sorted.get(entry.getKey()))));
 		}
 		
@@ -142,7 +140,7 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 		System.out.println("Print Style 5: Final sorted Array:");
 		for(Map.Entry<String, String> entry : sorted.entrySet())
 		{
-			System.out.println(entry.getKey() + " " + style1.format(
+			System.out.println(entry.getKey() + " " + style5.format(
 					new Date(sorted.get(entry.getKey()))));
 		}
 	}
