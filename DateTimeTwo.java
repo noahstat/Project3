@@ -1,5 +1,11 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Scanner;
 
 @SuppressWarnings("deprecation")
 public class DateTimeTwo {
@@ -55,12 +61,60 @@ public class DateTimeTwo {
 	}
 
 	public void compareYear() {
-		// TODO Auto-generated method stub
+		Date today = new Date();
+		ArrayList<String> dates = new ArrayList<String>();
+		ArrayList<String> years = new ArrayList<String>();
+		SimpleDateFormat year = new SimpleDateFormat("yyyy");
+		HashMap<LocalDate, Integer> toPrint = new HashMap<LocalDate, Integer>();//TODO haven't implemeted this part
+		
+		try {
+			Scanner in = new Scanner(new File("Dates.txt"));
+			boolean hasNext = in.hasNext();
+			int i = 0;
+			
+			while(hasNext)
+			{
+				dates.add(in.next());
+				years.add(year.format(dates.get(i)));
+				
+				hasNext = in.hasNext();
+				++i;
+			}
+			
+			in.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("Something went wrong reading the file....");
+		}
+		
+		for(int i = 0; i < years.size(); ++i)
+		{
+			String out = "";
+			boolean isLeap = false;
+			if(((Integer.parseInt(years.get(i))) % 4) == 0)// all leap years are evenly divisible by 4
+			{
+				isLeap = true;
+			}
+			
+			
+			Date given = new Date(years.get(i));
+			long diff = today.getTime() - given.getTime();
+			Date difference = new Date(diff);
+			
+			SimpleDateFormat leap = new SimpleDateFormat("' is a leap year, and Difference: 'yyyy' years, 'MM' months, and 'dd' days.'");
+			SimpleDateFormat notLeap = new SimpleDateFormat("' is not a leap year, and Difference: 'yyyy' years, 'MM' months, and 'dd' days.'");
+			
+			if(isLeap)
+				out = years.get(i) + leap.format(difference);
+			else 
+				out = years.get(i) + notLeap.format(difference);
+			
+			//now we need to use the HashMap to store the data
+		}
 		
 	}
 
 	public void dateHashMap() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
