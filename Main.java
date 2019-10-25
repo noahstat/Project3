@@ -38,7 +38,7 @@ public class Main
 		
 		/**
 		 * Section 1
-		 * Current value of “Second” will be stored in vlaueOfSecondNow 
+		 * Current value of second will be stored in vlaueOfSecondNow 
 		 * and will print as, "The value of Second now: 58"
 		 * Remember, this is the format only, value should be the current time.
 		 */
@@ -195,7 +195,7 @@ public class Main
 			1900-12-31:8
 			2000-12-15:5
 		 */
-	    dateTimeTwo.dateHashMapSorted();
+	    dateTimeTwo.dateHashMap();
 	    System.out.println("\nSorted map:");	    
 	    
 	    /**
@@ -227,8 +227,8 @@ public class Main
 		System.out.println("Stations are: "+ mesoEqual.calAsciiEqual());
 		
 		System.out.println("\nUnsroted Hashmap:");
-		asciiVal=mesoEqual.calAsciiEqual();		
-		for (String stIds : asciiVal.keySet()) 
+		asciiVal=mesoEqual.calAsciiEqual();
+		for (String stIds : asciiVal.keySet())
 		{
 			//System.out.println(stIds + " " + asciiVal.get(stIds));
 			//Printing the unsorted map
@@ -271,7 +271,7 @@ public class Main
 	    long estimatedTime = System.nanoTime() - startTime;
 	    
 	    /**
-		 * Sort the hashmap in ascending order.		 * 
+		 * Sort the hashmap in ascending order.		 
 		 * Output will be like:
 		 * 2011-03-15
 		 * 2012-10-10
