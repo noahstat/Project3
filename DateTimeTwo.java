@@ -62,58 +62,79 @@ public class DateTimeTwo {
 
 	public void compareYear() {
 		Date today = new Date();
-		ArrayList<String> dates = new ArrayList<String>();
-		ArrayList<String> years = new ArrayList<String>();
-		SimpleDateFormat year = new SimpleDateFormat("yyyy");
-		HashMap<LocalDate, Integer> toPrint = new HashMap<LocalDate, Integer>();//TODO haven't implemeted this part
+//		ArrayList<String> dates = new ArrayList<String>();
+//		ArrayList<String> years = new ArrayList<String>();
+//		SimpleDateFormat year = new SimpleDateFormat("yyyy");
+		HashMap<LocalDate, Integer> dates = new HashMap<LocalDate, Integer>();
 		
+		//read in the file and put it in an array list so I don't have to deal with resizing
 		try {
-			Scanner in = new Scanner(new File("Dates.txt"));
+			File given = new File("Dates.txt");
+			Scanner in = new Scanner(given);
 			boolean hasNext = in.hasNext();
 			int i = 0;
 			
 			while(hasNext)
 			{
-				dates.add(in.next());
-				years.add(year.format(dates.get(i)));
+				//get the whole string
+				String whole = in.next();//as in the whole enchilada
+				//split it into its components
+				String[] parts = whole.split(".");
+				//store those components as integers for the local date constructor
+				int month = Integer.parseInt(parts[0]);
+				int day = Integer.parseInt(parts[1]);
+				int year = Integer.parseInt(parts[2]);
 				
+				//make the date from the read in integers
+				LocalDate huh = LocalDate.of(year, month, day);
+				
+				//add them to the Hashmap
+				dates.put(huh, i);
+				
+				//find out if theres more to be read
 				hasNext = in.hasNext();
+				//increase the counter for key
 				++i;
 			}
 			
 			in.close();
+			
 		} catch (FileNotFoundException e) {
 			System.out.println("Something went wrong reading the file....");
 		}
 		
-		for(int i = 0; i < years.size(); ++i)
-		{
-			String out = "";
-			boolean isLeap = false;
-			if(((Integer.parseInt(years.get(i))) % 4) == 0)// all leap years are evenly divisible by 4
-			{
-				isLeap = true;
-			}
-			
-			
-			Date given = new Date(years.get(i));
-			long diff = today.getTime() - given.getTime();
-			Date difference = new Date(diff);
-			
-			SimpleDateFormat leap = new SimpleDateFormat("' is a leap year, and Difference: 'yyyy' years, 'MM' months, and 'dd' days.'");
-			SimpleDateFormat notLeap = new SimpleDateFormat("' is not a leap year, and Difference: 'yyyy' years, 'MM' months, and 'dd' days.'");
-			
-			if(isLeap)
-				out = years.get(i) + leap.format(difference);
-			else 
-				out = years.get(i) + notLeap.format(difference);
-			
-			//now we need to use the HashMap to store the data
-		}
+//		for(int i = 0; i < years.size(); ++i)
+//		{
+//			String out = "";
+//			boolean isLeap = false;
+//			if(((Integer.parseInt(years.get(i))) % 4) == 0)// all leap years are evenly divisible by 4
+//			{
+//				isLeap = true;
+//			}
+//			
+//			
+//			Date given = new Date(years.get(i));
+//			long diff = today.getTime() - given.getTime();
+//			Date difference = new Date(diff);
+//			
+//			SimpleDateFormat leap = new SimpleDateFormat("' is a leap year, and Difference: 'yyyy' years, 'MM' months, and 'dd' days.'");
+//			SimpleDateFormat notLeap = new SimpleDateFormat("' is not a leap year, and Difference: 'yyyy' years, 'MM' months, and 'dd' days.'");
+//			
+//			if(isLeap)
+//				out = years.get(i) + leap.format(difference);
+//			else 
+//				out = years.get(i) + notLeap.format(difference);
+//			
+//			//now we need to use the HashMap to store the data
+//			
+//		}
+		
+		
 		
 	}
 
 	public void dateHashMap() {
+		
 		
 		
 	}
