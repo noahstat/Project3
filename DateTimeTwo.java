@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 @SuppressWarnings("deprecation")
 public class DateTimeTwo {
@@ -79,7 +80,8 @@ public class DateTimeTwo {
 				//get the whole string
 				String whole = in.next();//as in the whole enchilada
 				//split it into its components
-				String[] parts = whole.split(".");
+				String[] parts = whole.split("\\.");
+				
 				//store those components as integers for the local date constructor
 				int month = Integer.parseInt(parts[0]);
 				int day = Integer.parseInt(parts[1]);
@@ -99,43 +101,67 @@ public class DateTimeTwo {
 			
 			in.close();
 			
+			for (LocalDate key : dates.keySet()) 
+			{
+			    System.out.println(key.toString() + ":" + dates.get(key));
+			}
+			
 		} catch (FileNotFoundException e) {
 			System.out.println("Something went wrong reading the file....");
 		}
-		
-//		for(int i = 0; i < years.size(); ++i)
-//		{
-//			String out = "";
-//			boolean isLeap = false;
-//			if(((Integer.parseInt(years.get(i))) % 4) == 0)// all leap years are evenly divisible by 4
-//			{
-//				isLeap = true;
-//			}
-//			
-//			
-//			Date given = new Date(years.get(i));
-//			long diff = today.getTime() - given.getTime();
-//			Date difference = new Date(diff);
-//			
-//			SimpleDateFormat leap = new SimpleDateFormat("' is a leap year, and Difference: 'yyyy' years, 'MM' months, and 'dd' days.'");
-//			SimpleDateFormat notLeap = new SimpleDateFormat("' is not a leap year, and Difference: 'yyyy' years, 'MM' months, and 'dd' days.'");
-//			
-//			if(isLeap)
-//				out = years.get(i) + leap.format(difference);
-//			else 
-//				out = years.get(i) + notLeap.format(difference);
-//			
-//			//now we need to use the HashMap to store the data
-//			
-//		}
-		
-		
-		
 	}
 
 	public void dateHashMap() {
 		
+		Date today = new Date();
+		HashMap<LocalDate, Integer> dates = new HashMap<LocalDate, Integer>();
 		
+		//read in the file and put it in an array list so I don't have to deal with resizing
+		try {
+			File given = new File("Dates.txt");
+			Scanner in = new Scanner(given);
+			boolean hasNext = in.hasNext();
+			int i = 0;
+			
+			while(hasNext)
+			{
+				//get the whole string
+				String whole = in.next();//as in the whole enchilada
+				//split it into its components
+				String[] parts = whole.split("\\.");
+				
+				//store those components as integers for the local date constructor
+				int month = Integer.parseInt(parts[0]);
+				int day = Integer.parseInt(parts[1]);
+				int year = Integer.parseInt(parts[2]);
+				
+				//make the date from the read in integers
+				LocalDate huh = LocalDate.of(year, month, day);
+				
+				//add them to the Hashmap
+				dates.put(huh, i);
+				
+				//find out if theres more to be read
+				hasNext = in.hasNext();
+				//increase the counter for key
+				++i;
+			}
+			
+			in.close();
+			
+			//this will sort it based on the keys
+			TreeMap<LocalDate, Integer> sorted = new TreeMap<LocalDate, Integer>(dates);
+			
+			
+			
+			for (LocalDate key : sorted.keySet()) 
+			{
+			    System.out.println(key.toString() + ":" + sorted.get(key));
+			}
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("Something went wrong reading the file....");
+		}
 		
 	}
 
