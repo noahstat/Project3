@@ -63,12 +63,10 @@ public class DateTimeTwo {
 
 	public void compareYear() {
 		Date today = new Date();
-//		ArrayList<String> dates = new ArrayList<String>();
-//		ArrayList<String> years = new ArrayList<String>();
-//		SimpleDateFormat year = new SimpleDateFormat("yyyy");
+		SimpleDateFormat out = new SimpleDateFormat("y' years, 'M' months, and 'd' days.'");
 		HashMap<LocalDate, Integer> dates = new HashMap<LocalDate, Integer>();
 		
-		//read in the file and put it in an array list so I don't have to deal with resizing
+		//read in the file and put it in a hashmap
 		try {
 			File given = new File("Dates.txt");
 			Scanner in = new Scanner(given);
@@ -103,7 +101,26 @@ public class DateTimeTwo {
 			
 			for (LocalDate key : dates.keySet()) 
 			{
-			    System.out.println(key.toString() + ":" + dates.get(key));
+				//2017 is not a leap year, and Difference: 2 years, 5 months, and 3 days.
+				if(key.getYear() % 4 != 0)
+				{
+					Date keyDate = new Date(key.getYear()-1900, key.getMonthValue(), key.getDayOfMonth());
+					Date diff = new Date(today.getDate() - keyDate.getTime());
+					
+					System.out.println(key.getYear()+ " is not a leap year, and Difference: " 
+				    		+ (diff.getYear() - 20) + " years, " + diff.getMonth() 
+				    		+ " months, and " + diff.getDay() + " days.'");
+				}
+				else
+				{
+					Date keyDate = new Date(key.getYear()-1900, key.getMonthValue(), key.getDayOfMonth());
+					Date diff = new Date(today.getDate() - keyDate.getTime());
+					
+					System.out.println(key.getYear()+ " is not a leap year, and Difference: " 
+				    		+ (diff.getYear() - 20) + " years, " + diff.getMonth() 
+				    		+ " months, and " + diff.getDay() + " days.'");
+				}
+			    
 			}
 			
 		} catch (FileNotFoundException e) {
@@ -116,7 +133,7 @@ public class DateTimeTwo {
 		Date today = new Date();
 		HashMap<LocalDate, Integer> dates = new HashMap<LocalDate, Integer>();
 		
-		//read in the file and put it in an array list so I don't have to deal with resizing
+		//read in the file and put it in a hashmap
 		try {
 			File given = new File("Dates.txt");
 			Scanner in = new Scanner(given);
