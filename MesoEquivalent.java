@@ -21,9 +21,12 @@ public class MesoEquivalent {
 			Scanner in = new Scanner(given);
 
 			boolean hasNext = in.hasNext();
-			int i = 0;
 			boolean hasInt = false;
 
+			//read in the unuseable lines
+			in.nextLine();
+			in.nextLine();
+			
 			while (hasNext) {
 				String station = in.next();
 				int sum = 0;
@@ -36,7 +39,7 @@ public class MesoEquivalent {
 				}
 
 				if (!hasInt) {
-					for (int j = 0; i < 4; ++i) {
+					for (int j = 0; j < 4; ++j) {
 						sum += (int) station.charAt(j);
 					}
 
@@ -50,8 +53,9 @@ public class MesoEquivalent {
 
 				// find out if theres more to be read
 				hasNext = in.hasNext();
-				// increase the counter for key
-				++i;
+				// reset the hasInt
+				hasInt = false;
+				
 			}
 
 			in.close();
