@@ -33,6 +33,10 @@ public class MesoAsciiCal extends MesoAsciiAbstract {
 			int i = 0;
 			boolean hasInt = false;
 
+			//read the first two unuseabe lines
+			in.hasNextLine();
+			in.hasNextLine();
+			
 			while (hasNext) {
 				String station = in.next();
 				int sum = 0;
@@ -44,6 +48,7 @@ public class MesoAsciiCal extends MesoAsciiAbstract {
 					}
 				}
 
+				//find out if it contains numbers
 				if (!hasInt) {
 					for (int j = 0; i < 4; ++i) {
 						sum += (int) station.charAt(j);
