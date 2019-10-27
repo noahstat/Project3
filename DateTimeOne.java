@@ -27,7 +27,7 @@ public class DateTimeOne extends MesoDateTimeOneAbstract
 	void dateTimeNow() {
 		//Current Date/Time: 10/10/2019 06:24 PM
 		//month/day/year hour:minute am/pm
-		SimpleDateFormat form = new SimpleDateFormat("MM/dd/yyyy kk:mm a");
+		SimpleDateFormat form = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
 		String output = "Current Date/Time: " + form.format(date);
 		System.out.println(output);
 		

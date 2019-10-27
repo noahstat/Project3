@@ -15,7 +15,7 @@ public class MesoLexicographical extends MesoSortedAbstract
 		{
 			//System.out.println(stIds + " " + asciiVal.get(stIds));
 			//Printing the unsorted map
-		    System.out.println(stIds + " " + sorted.get(stIds));		    
+		    System.out.println(stIds);		    
 		}	
 	}
 
@@ -27,7 +27,7 @@ public class MesoLexicographical extends MesoSortedAbstract
 		{
 			//System.out.println(stIds + " " + asciiVal.get(stIds));
 			//Printing the unsorted map
-		    System.out.println(stIds + " " + sorted.get(stIds));		    
+		    System.out.println(stIds);		    
 		}	
 		
 		return sorted;

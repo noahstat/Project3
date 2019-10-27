@@ -83,7 +83,7 @@ public class MesoAsciiCal extends MesoAsciiAbstract {
 				toReturn += key + equal.get(key);
 			}
 			
-			System.out.println(key + ", " + equal.get(key));
+//			System.out.println(key + ", " + equal.get(key));
 
 			++i;
 		}

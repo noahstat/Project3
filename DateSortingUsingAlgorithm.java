@@ -25,7 +25,7 @@ public class DateSortingUsingAlgorithm {
 				//get the whole string
 				whole = in.next();//as in the whole enchilada
 				
-				if(!whole.isBlank())//make sure it is not just whitespace
+				if(!whole.isEmpty())//make sure it is not just whitespace
 				{
 					//split it into its components
 					String[] parts = whole.split("-");
@@ -46,7 +46,7 @@ public class DateSortingUsingAlgorithm {
 			
 			for (LocalDate stIds : holding.keySet())
 			{
-			    System.out.println(stIds + " " + holding.get(stIds));		    
+			    System.out.println(stIds);		    
 			}
 			
 			in.close();
@@ -69,7 +69,7 @@ public class DateSortingUsingAlgorithm {
 				//get the whole string
 				whole = in.next();//as in the whole enchilada
 				
-				if(!whole.isBlank())//make sure it is not just whitespace
+				if(!whole.isEmpty())//make sure it is not just whitespace
 				{
 					//split it into its components
 					String[] parts = whole.split("-");
@@ -90,7 +90,7 @@ public class DateSortingUsingAlgorithm {
 			
 			for (LocalDate stIds : holding.keySet())
 			{
-			    System.out.println(stIds + " " + holding.get(stIds));		    
+			    System.out.println(stIds);		    
 			}
 			
 			in.close();

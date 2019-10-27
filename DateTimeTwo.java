@@ -45,20 +45,29 @@ public class DateTimeTwo {
 		
 		String fifteenthDay = (day.format(givenDate)).toUpperCase();
 		
-		//the months that have 31: september, april, june, november, and fubruary
-		if(givenDate.getMonth() != 1 || givenDate.getMonth() != 8 || givenDate.getMonth() != 3
-				|| givenDate.getMonth() != 5 || givenDate.getMonth() != 10)
-			givenDate.setDate(31);
+		if(givenDate.getYear() % 4 == 0 && givenDate.getMonth() == 1)
+			givenDate.setDate(29);
+		//the months that have 30: september, april, june, november,
+		else if(givenDate.getMonth() == 8)
+			givenDate.setDate(30);
+		else if(givenDate.getMonth() == 3)
+			givenDate.setDate(30);
+		else if(givenDate.getMonth() == 5)
+			givenDate.setDate(30);
+		else if(givenDate.getMonth() == 10)
+			givenDate.setDate(30);
 		else if(givenDate.getMonth() == 1) // make sure its not febuary (we're gonna act like leap year is fake)
 			givenDate.setDate(28);
 		else
-			givenDate.setDate(30);
+			givenDate.setDate(31);
 		
 		String lastDay = (day.format(givenDate)).toUpperCase();
 		
-		System.out.println("For the year (" + (givenDate.getYear() + 1900) + ") and month (" 
-				+ (givenDate.getMonth() + 1) + "), the fifteenth day is " + 
-				fifteenthDay + " and the last day is " + lastDay);
+			System.out.println("For the year (" + (givenDate.getYear() + 1900) + ") and month (" 
+					+ (givenDate.getMonth()+1) + "), the fifteenth day is " + 
+					fifteenthDay + " and the last day is " + lastDay);
+
+		
 	}
 
 	public void compareYear() {
@@ -102,7 +111,7 @@ public class DateTimeTwo {
 			for (LocalDate key : dates.keySet()) 
 			{
 				//2017 is not a leap year, and Difference: 2 years, 5 months, and 3 days.
-				if(key.getYear() % 4 != 0)
+				if(key.getYear() % 4 != 0 || key.getYear() == 1900)
 				{
 					Date keyDate = new Date(key.getYear()-1900, key.getMonthValue(), key.getDayOfMonth());
 					Date diff = new Date(today.getDate() - keyDate.getTime());
@@ -116,7 +125,7 @@ public class DateTimeTwo {
 					Date keyDate = new Date(key.getYear()-1900, key.getMonthValue(), key.getDayOfMonth());
 					Date diff = new Date(today.getDate() - keyDate.getTime());
 					
-					System.out.println(key.getYear()+ " is not a leap year, and Difference: " 
+					System.out.println(key.getYear()+ " is a leap year, and Difference: " 
 				    		+ (diff.getYear() - 20) + " years, " + diff.getMonth() 
 				    		+ " months, and " + diff.getDay() + " days.'");
 				}
@@ -127,8 +136,56 @@ public class DateTimeTwo {
 			System.out.println("Something went wrong reading the file....");
 		}
 	}
+	
+	public void dateHashMap()
+	{
+		Date today = new Date();
+		HashMap<LocalDate, Integer> dates = new HashMap<LocalDate, Integer>();
+		
+		//read in the file and put it in a hashmap
+		try {
+			File given = new File("Dates.txt");
+			Scanner in = new Scanner(given);
+			boolean hasNext = in.hasNext();
+			int i = 0;
+			
+			while(hasNext)
+			{
+				//get the whole string
+				String whole = in.next();//as in the whole enchilada
+				//split it into its components
+				String[] parts = whole.split("\\.");
+				
+				//store those components as integers for the local date constructor
+				int month = Integer.parseInt(parts[0]);
+				int day = Integer.parseInt(parts[1]);
+				int year = Integer.parseInt(parts[2]);
+				
+				//make the date from the read in integers
+				LocalDate huh = LocalDate.of(year, month, day);
+				
+				//add them to the Hashmap
+				dates.put(huh, i);
+				
+				//find out if theres more to be read
+				hasNext = in.hasNext();
+				//increase the counter for key
+				++i;
+			}
+			
+			in.close();
+			
+			for (LocalDate key : dates.keySet()) 
+			{
+			    System.out.println(key.toString() + ":" + dates.get(key));
+			}
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("Something went wrong reading the file....");
+		}
+	}
 
-	public void dateHashMap() {
+	public void dateHashMapSorted() {
 		
 		Date today = new Date();
 		HashMap<LocalDate, Integer> dates = new HashMap<LocalDate, Integer>();
@@ -168,7 +225,7 @@ public class DateTimeTwo {
 			
 			//this will sort it based on the keys
 			TreeMap<LocalDate, Integer> sorted = new TreeMap<LocalDate, Integer>(dates);
-			
+//			HashMap<LocalDate, Integer> sorted = new HashMap<LocalDate, Integer>(sort);
 			
 			
 			for (LocalDate key : sorted.keySet()) 

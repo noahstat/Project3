@@ -195,7 +195,7 @@ public class Main
 			1900-12-31:8
 			2000-12-15:5
 		 */
-	    dateTimeTwo.dateHashMap();
+	    dateTimeTwo.dateHashMapSorted();
 	    System.out.println("\nSorted map:");	    
 	    
 	    /**
@@ -226,13 +226,13 @@ public class Main
 		 */
 		System.out.println("Stations are: "+ mesoEqual.calAsciiEqual());
 		
-		System.out.println("\nUnsroted Hashmap:");
+		System.out.println("\nUnsorted Hashmap:");
 		asciiVal=mesoEqual.calAsciiEqual();
 		for (String stIds : asciiVal.keySet())
 		{
 			//System.out.println(stIds + " " + asciiVal.get(stIds));
 			//Printing the unsorted map
-		    System.out.println(stIds + " " + asciiVal.get(stIds));		    
+		    System.out.println(stIds);		    
 		}		
 		
 	    /**
